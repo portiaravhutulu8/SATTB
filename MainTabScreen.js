@@ -33,7 +33,7 @@ const MainTabScreen = () => {
         options={{
           tabBarLabel: 'Tournaments',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="tennis-ball" color={color} size={26} />
           ),
         }}
       />
@@ -41,9 +41,9 @@ const MainTabScreen = () => {
         name="RegisteredTournaments"
         component={RegisteredTournamentsScreen}
         options={{
-          tabBarLabel: 'RegisteredTournaments',
+          tabBarLabel: 'Registered Tournaments',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="tennis" color={color} size={26} />
           ),
         }}
       />
@@ -53,7 +53,7 @@ const MainTabScreen = () => {
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="cog" color={color} size={26} />
           ),
         }}
       />

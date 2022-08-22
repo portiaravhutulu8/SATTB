@@ -272,9 +272,10 @@ const HomeScreen = ({navigation}) => {
     },
     styleMainPageHeaderImage: {
       position: "absolute",
-      left: 76,
+      //left: 76,
       top: 45,
       bottom: 980,
+      alignSelf: "center",
       borderRadius: null,
       width: 184,
       height: 55,
