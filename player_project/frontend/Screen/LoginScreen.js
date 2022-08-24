@@ -15,7 +15,7 @@ const LoginScreen = ({navigation}) => {
     secureTextEntry: true,
 
   });
-    const [userEmail, setUserEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errortext, setErrortext] = useState('');
@@ -26,7 +26,7 @@ const LoginScreen = ({navigation}) => {
 
     const handleSubmitPress = () => {
         setErrortext('');
-        if (!userEmail) {
+        if (!userName) {
             alert('Please fill Username');
             return;
         }
@@ -35,7 +35,7 @@ const LoginScreen = ({navigation}) => {
             return;
         }
         setLoading(true);
-        let dataToSend = {email: userEmail, password: userPassword};
+        let dataToSend = {email: userName, password: userPassword};
         let formBody = [];
         for (let key in dataToSend) {
             let encodedKey = encodeURIComponent(key);
@@ -94,8 +94,8 @@ const LoginScreen = ({navigation}) => {
                 <View style={styles.SectionStyle}>
                   <TextInput
                     style={styles.inputStyle}
-                    onChangeText={(UserEmail) =>
-                      setUserEmail(UserEmail)
+                    onChangeText={(UserName) =>
+                      setUserName(UserName)
                     }
                     placeholder="Enter Username" //dummy@abc.com
                     placeholderTextColor="#8b9cb5"

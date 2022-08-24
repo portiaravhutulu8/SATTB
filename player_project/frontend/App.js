@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContent } from '@react-navigation/drawer';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import MainTabScreen from './MainTabScreen';
 import TournamentsScreen from './Screen/DrawerScreens/TournamentsScreen';
-
+import ProfileScreen from './Screen/ProfileScreen';
 import { AuthContext } from './Screen/Components/context';
 
 import RootStackScreen from './Screen/RootStackScreen';
@@ -16,6 +16,7 @@ import { Switch } from 'react-native-gesture-handler';
 import { Logs } from 'expo';
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
   //const [isLoading, setIsLoading] =React.useState(true);
@@ -118,6 +119,10 @@ const App = () => {
         <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
         <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
+        <Drawer.Screen 
+  name="ProfileScreen"
+  component={ProfileScreen} 
+  options= {{headerShown: false}}/>
         </Drawer.Navigator>
       )
     :
@@ -128,6 +133,7 @@ const App = () => {
         <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
   </Drawer.Navigator>*/}
+  
     </NavigationContainer>
     </AuthContext.Provider>
   );

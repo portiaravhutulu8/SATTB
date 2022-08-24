@@ -6,6 +6,7 @@ import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInpu
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 //import { TextInput } from 'react-native-web';
   
 
@@ -60,8 +61,9 @@ const HomeScreen = ({navigation}) => {
 
         <View style={stylesheet.styleGrayHeader}>
         </View>
-        <Image style={stylesheet.styleUserImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/fMOJEF7qf7mmHIFFVZlpQLoz.png" }}>
-        </Image>
+        <TouchableOpacity onPress={ () => navigation.navigate('ProfileScreen')}>
+            <Image style={stylesheet.styleUserImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/fMOJEF7qf7mmHIFFVZlpQLoz.png" }}/>
+        </TouchableOpacity>
         <Image style={stylesheet.styleMainPageHeaderImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/YcKxdBFJPrfjR63lzPnTWAiS.png" }}>
         </Image>
       </View>

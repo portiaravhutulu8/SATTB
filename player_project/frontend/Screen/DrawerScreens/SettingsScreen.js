@@ -4,12 +4,14 @@ import React from 'react';
 import {View, Text, StyleSheet, Button, SafeAreaView, Dimensions, Alert} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Parse from '@parse/react-native';
+import {ProfileScreen} from '../ProfileScreen';
+import { AuthContext } from '../Components/context';
 
-//const SettingsScreen = ({}) => {
+//export const SettingsScreen = () => {
   const SettingsScreen = () => {
     const navigation = useNavigation();
 
-    const doUserLogOut = async function () {
+    {/*const doUserLogOut = async function () {
       return await Parse.User.logOut()
       .then(async () => {
 
@@ -24,10 +26,14 @@ import Parse from '@parse/react-native';
         Alert.alert('Error!', error.message);
         return false;
       });
-    }; 
+    }; */}
+
+    const { signOut } = React.useContext(AuthContext);
+
  
 
     return (
+      
         <View style= {stylesheet.Settings}>
           
          
@@ -38,21 +44,23 @@ import Parse from '@parse/react-native';
               </Text>
           
             
-              <Text  style= {stylesheet.Profile}>
+              <Text  
+              style= {stylesheet.Profile}
+              onPress={ () => navigation.navigate('ProfileScreen')}>
+
                 Profile
               </Text>
-            
+    
            
               <Text style= {stylesheet.General}>
                 General
               </Text>
               
           
-            <TouchableOpacity onPress={() => doUserLogOut()}>
-              <Text style= {stylesheet.Logout}>
+              <Text style= {stylesheet.Logout}
+              onPress={() => {signOut()}}>
                 Logout
             </Text>
-            </TouchableOpacity>
           </View>
       
       

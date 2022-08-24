@@ -8,7 +8,7 @@ const TournamentsScreen = () => {
           <View style = {stylesheet.TournamentsCont}>
           </View>
           <Image 
-          source={require('/Users/thilivhaliportiaravhutulu/SATableTennisApp/Image/TournamentHeader.png')}
+          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/frontend/Image/TournamentHeader.png')}
           style= {stylesheet.styleTournamentHeader}>
         </Image>
           <View style = {stylesheet.Group1}>
