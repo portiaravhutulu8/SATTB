@@ -17,6 +17,7 @@ const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
+  const [userGender, setUserGender] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ const RegisterScreen = (props) => {
 
   const emailInputRef = createRef();
   const ageInputRef = createRef();
+  const genderInputRef = createRef();
   const addressInputRef = createRef();
   const passwordInputRef = createRef();
 
@@ -45,6 +47,10 @@ const RegisterScreen = (props) => {
       alert('Please fill Age');
       return;
     }
+    if (!userGender) {
+      alert('Please fill Gender');
+      return;
+    }
     if (!userAddress) {
       alert('Please fill Address');
       return;
@@ -59,6 +65,7 @@ const RegisterScreen = (props) => {
       name: userName,
       email: userEmail,
       age: userAge,
+      gender: userGender,
       address: userAddress,
       password: userPassword,
     };
@@ -194,6 +201,23 @@ const RegisterScreen = (props) => {
               placeholderTextColor="#8b9cb5"
               keyboardType="numeric"
               ref={ageInputRef}
+              returnKeyType="next"
+              onSubmitEditing={() =>
+                genderInputRef.current &&
+                genderInputRef.current.focus()
+              }
+              blurOnSubmit={false}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={(UserGender) => setUserGender(UserGender) }
+              underlineColorAndroid="#f000"
+              placeholder="Enter Gender"
+              placeholderTextColor="#8b9cb5"
+              autoCapitalize="sentences"
+              ref={genderInputRef}
               returnKeyType="next"
               onSubmitEditing={() =>
                 addressInputRef.current &&

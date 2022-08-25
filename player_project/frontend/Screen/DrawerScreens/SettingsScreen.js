@@ -7,6 +7,7 @@ import Parse from '@parse/react-native';
 import {ProfileScreen} from '../ProfileScreen';
 import { AuthContext } from '../Components/context';
 
+
 //export const SettingsScreen = () => {
   const SettingsScreen = () => {
     const navigation = useNavigation();

@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import TournamentsScreen from './TournamentsScreen';
 import { useFonts } from '@expo-google-fonts/inter';
-import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'; 
+import { Dimensions, Image, ScrollView, SafeAreaView, Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'; 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 //import { TextInput } from 'react-native-web';
   
-
 const HomeScreen = ({navigation}) => {
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={{ height: Dimensions.get("window").height }}>
+    <ScrollView  showsVerticalScrollIndicator={false} style={{ height: Dimensions.get("window").height }}>
       <View style={stylesheet.styleHomePage}>
+      <View style={stylesheet.styleGrayHeader}>
+        </View>
+        <TouchableOpacity onPress={ () => navigation.navigate('ProfileScreen')}>
+            <Image style={stylesheet.styleUserImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/fMOJEF7qf7mmHIFFVZlpQLoz.png" }}/>
+        </TouchableOpacity>
+        <Image style={stylesheet.styleMainPageHeaderImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/YcKxdBFJPrfjR63lzPnTWAiS.png" }}>
+        </Image>
+        
         <View style={stylesheet.styleTournamentsButton}>
          <Image style={stylesheet.styleImage3} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/AfDJdBGfo0p6B3oqC0Az9WSt.jpeg" }}>
           </Image>
@@ -59,13 +66,7 @@ const HomeScreen = ({navigation}) => {
         </View>
 
 
-        <View style={stylesheet.styleGrayHeader}>
-        </View>
-        <TouchableOpacity onPress={ () => navigation.navigate('ProfileScreen')}>
-            <Image style={stylesheet.styleUserImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/fMOJEF7qf7mmHIFFVZlpQLoz.png" }}/>
-        </TouchableOpacity>
-        <Image style={stylesheet.styleMainPageHeaderImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/YcKxdBFJPrfjR63lzPnTWAiS.png" }}>
-        </Image>
+       
       </View>
     </ScrollView>
   )

@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'; 
 import {Svg, Path } from 'react-native-svg';
 
+
 const TournamentsScreen = () => {
     return (
         <View style = {stylesheet.Tournaments}>

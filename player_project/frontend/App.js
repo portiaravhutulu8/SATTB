@@ -19,8 +19,8 @@ const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const App = () => {
-  //const [isLoading, setIsLoading] =React.useState(true);
-  //const [userToken, setUserToken] =React.useState(null);
+  const [isLoading, setIsLoading] =React.useState(true);
+  const [userToken, setUserToken] =React.useState(null);
 
   const initialLoginState ={
     isLoading: true,
@@ -48,7 +48,7 @@ const App = () => {
         };
       case 'LOGOUT':
           return{
-            ...prevState,
+      
             userName: null,
             userToken: null,
             isLoading: false,
@@ -65,13 +65,14 @@ const App = () => {
 
   };
 
+
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
   const authContext = React.useMemo(() => ({
     signIn: () => {
       //setUserToken('abcd');
       //setIsLoading(false);
       let userToken;
-      userName: null;
+      userName= null;
       if(userName == 'user' && password == 'password') {
         userToken = 'abcd';
       }
@@ -79,9 +80,11 @@ const App = () => {
       dispatch({ type: 'LOGIN', id: userName, token: userToken });
     },
     signOut: () => {
-      //setUserToken(null);
-      //setIsLoading(false);
-      dispatch({ type: 'LOGOUT' });
+      let userToken;
+      userToken= null;
+      setUserToken(null);
+      setIsLoading(false);
+      dispatch({ type: 'LOGOUT', token: userToken });
     },
     signUp: () => {
       setUserToken('abcd');
