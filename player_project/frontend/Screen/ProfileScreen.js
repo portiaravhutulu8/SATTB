@@ -17,6 +17,11 @@ const ProfileScreen = () => {
             <AntDesign 
             name="arrowleft" 
             size={45}
+            style={{
+              position: 'absolute',
+              top: 18,
+              left: 15
+            }}
             color="rgba(0,0,0,1)"
             onPress={ () => navigation.goBack('SettingsScreen')}
             />
@@ -41,9 +46,10 @@ const ProfileScreen = () => {
             </Text>
    
           </View>
-      
+    
       
       );
+      
     }
   
   export default ProfileScreen;

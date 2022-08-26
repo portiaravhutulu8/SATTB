@@ -8,7 +8,7 @@ import MainTabScreen from './MainTabScreen';
 import TournamentsScreen from './Screen/DrawerScreens/TournamentsScreen';
 import ProfileScreen from './Screen/ProfileScreen';
 import { AuthContext } from './Screen/Components/context';
-
+import RegisterButton from './Screen/RegisterButton';
 import RootStackScreen from './Screen/RootStackScreen';
 import { ActivityIndicator } from 'react-native-paper';
 import { Switch } from 'react-native-gesture-handler';
@@ -115,6 +115,7 @@ const App = () => {
       </View>
     )
   }
+  
   return (
     <AuthContext.Provider value={authContext}>
     <NavigationContainer>
@@ -122,6 +123,7 @@ const App = () => {
         <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
         <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
+        <Drawer.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
         <Drawer.Screen 
   name="ProfileScreen"
   component={ProfileScreen} 

@@ -3,7 +3,7 @@ import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInpu
 import {Svg, Path } from 'react-native-svg';
 
 
-const TournamentsScreen = () => {
+const TournamentsScreen = ({navigation}) => {
     return (
         <View style = {stylesheet.Tournaments}>
           <View style = {stylesheet.TournamentsCont}>
@@ -21,7 +21,8 @@ const TournamentsScreen = () => {
               </Text>
             
             
-              <Text style = {stylesheet.Register}>
+              <Text style = {stylesheet.Register}
+              onPress={ () => navigation.navigate('RegisterButton')}>
                 Register
               </Text>
            
@@ -35,7 +36,9 @@ const TournamentsScreen = () => {
               </Text>
            
             
-              <Text style = {stylesheet.Registered}>
+              <Text 
+              style = {stylesheet.Registered}
+              onPress={ () => navigation.navigate('RegisteredTournaments')}>
                 Registered
               </Text>
             
@@ -96,7 +99,7 @@ const TournamentsScreen = () => {
         transform: [{translateX: 0}, {translateY:0}, {rotate: "0deg"},],
         backgroundColor: "rgba(235,235,235,1)",
         left: 0,
-        top: -63,
+        top: -103,
       },
       styleTournamentHeader: {
         position: "absolute",

@@ -8,7 +8,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 //import { TextInput } from 'react-native-web';
-  
+import RegisteredTournamentsScreen from './RegisteredTournamentsScreen';
+
+
 const HomeScreen = ({navigation}) => {
   return (
     <ScrollView  showsVerticalScrollIndicator={false} style={{ height: Dimensions.get("window").height }}>
