@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-
+const bcrypt = require('bcrypt');
 const playerSchema = new mongoose.Schema(
     {
         firstName:
@@ -40,19 +39,21 @@ const playerSchema = new mongoose.Schema(
         }*/
     });
 //function (next)
-playerSchema.pre('save', async function(next) {
+playerSchema.pre('save', async function (next) {
 
-
-    if (this.password == this.verifyPassword) {
-        if (this.isModified('password')) {
-            const hash = await bcrypt.hash(this.password, 8)
-            this.password = hash
-        }
-        next();
-    } else {
-        //res.status(400).json({ success: false, error: "passwords differ" })
+    if (this.isModified('password')) {
+        const hash = await bcrypt.hash(this.password, 8)
+        this.password = hash
     }
+    next();
+
 
 });
+
+playerSchema.methods.comparePassword=async function(password)
+{
+    const result=await bcrypt.compareSync(password,this.password);
+    return result;
+};
 
 module.exports = mongoose.model("Player", playerSchema);

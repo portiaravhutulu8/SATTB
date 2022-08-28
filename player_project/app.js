@@ -4,10 +4,10 @@
 const express = require('express');
 const app = express();
 require("./Database/db")
-
+require("dotenv").config();
 
 const PORT = process.env.PORT || 8000;
-const playerRouter = require('./routes/player')
+const playerRouter = require("./routes/player.js")
 
 
 app.use(express.json());
