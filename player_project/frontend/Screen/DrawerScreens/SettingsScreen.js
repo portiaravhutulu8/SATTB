@@ -53,9 +53,9 @@ import { AuthContext } from '../Components/context';
               </Text>
     
            
-              <Text style= {stylesheet.General}>
+              {/*<Text style= {stylesheet.General}>
                 General
-              </Text>
+    </Text>*/}
               
           
               <Text style= {stylesheet.Logout}
@@ -128,7 +128,7 @@ import { AuthContext } from '../Components/context';
         height: 50,
         left: 25,
         right: "auto",
-        top: 316,
+        top: 241,
         bottom: "auto",
         transform: [{translateX:0}, {translateY:0}, {rotate: "0deg"},],
         //fontFamily: "Inter",

@@ -12,8 +12,10 @@ import RegisterButton from './Screen/RegisterButton';
 import RootStackScreen from './Screen/RootStackScreen';
 import { ActivityIndicator } from 'react-native-paper';
 import { Switch } from 'react-native-gesture-handler';
+import RankingsScreen from './Screen/RankingsScreen';
 //import RegisterScreen from './Screen/RegisterScreen';
 import { Logs } from 'expo';
+import HomeScreen from './Screen/DrawerScreens/HomeScreen';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -81,7 +83,7 @@ const App = () => {
     },
     signOut: () => {
       let userToken;
-      userToken= null;
+      userToken== null;
       setUserToken(null);
       setIsLoading(false);
       dispatch({ type: 'LOGOUT', token: userToken });
@@ -124,6 +126,10 @@ const App = () => {
         <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
         <Drawer.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
+        <Drawer.Screen name="RankingsScreen" component={RankingsScreen} options= {{headerShown: false}} />
+        <Drawer.Screen name="Home" component={HomeScreen} options= {{headerShown: false}} />
+
+
         <Drawer.Screen 
   name="ProfileScreen"
   component={ProfileScreen} 

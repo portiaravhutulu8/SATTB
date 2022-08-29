@@ -20,16 +20,17 @@ const RegisterButton = () => {
           style= {stylesheet.styleTournamentHeader}>
             
         </Image>
+        
         <AntDesign 
             name="arrowleft" 
             size={45}
             style={{
               position: 'absolute',
-              top: 39,
+              top: 40,
               left: 15
             }}
             color="rgba(0,0,0,1)"
-            onPress={ () => navigation.goBack('TournamentsScreen')}
+            onPress={ () => navigation.goBack(null)}
             />
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >

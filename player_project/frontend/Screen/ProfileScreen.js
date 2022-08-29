@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign.js';
 import {View, Text, StyleSheet, Button, SafeAreaView, Dimensions, Alert} from 'react-native';
-import SettingsScreen from './DrawerScreens/SettingsScreen';
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
@@ -11,8 +10,6 @@ const ProfileScreen = () => {
       
         <View style= {stylesheet.Profilepage}>
           
-         
-            
           <View style={stylesheet.styleGrayHeader}>
             <AntDesign 
             name="arrowleft" 
@@ -23,7 +20,7 @@ const ProfileScreen = () => {
               left: 15
             }}
             color="rgba(0,0,0,1)"
-            onPress={ () => navigation.goBack('SettingsScreen')}
+            onPress={ () => navigation.goBack(null)}
             />
           </View>
               <Text h1 bold style= {stylesheet.Profile}>
@@ -37,7 +34,7 @@ const ProfileScreen = () => {
             
            
               <Text style= {stylesheet.LastName}>
-                Last Name
+                Last Name:
               </Text>
               
             

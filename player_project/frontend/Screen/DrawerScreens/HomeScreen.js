@@ -41,7 +41,9 @@ const HomeScreen = ({navigation}) => {
           <Text style={stylesheet.styleViewRankingsOfPlayersThroughoutSouthAfrica}>
             View rankings of players throughout South Africa
           </Text>
-          <Text style={stylesheet.styleCaption2}>
+          <Text 
+          style={stylesheet.styleCaption2}
+          onPress={ () => navigation.navigate('RankingsScreen')}>
             Rankings
           </Text>
         </View>

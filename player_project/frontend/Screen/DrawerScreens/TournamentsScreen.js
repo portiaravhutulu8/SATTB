@@ -20,7 +20,7 @@ const TournamentsScreen = ({navigation}) => {
                 Join available tournaments
               </Text>
             
-            
+          
               <Text style = {stylesheet.Register}
               onPress={ () => navigation.navigate('RegisterButton')}>
                 Register
