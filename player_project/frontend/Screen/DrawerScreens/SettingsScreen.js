@@ -7,27 +7,9 @@ import Parse from '@parse/react-native';
 import {ProfileScreen} from '../ProfileScreen';
 import { AuthContext } from '../Components/context';
 
-
-//export const SettingsScreen = () => {
   const SettingsScreen = () => {
     const navigation = useNavigation();
 
-    {/*const doUserLogOut = async function () {
-      return await Parse.User.logOut()
-      .then(async () => {
-
-        const currentUser = await Parse.User.currentAsync();
-        if (currentUser === null) {
-          Alert.alert('Success!', 'No user is logged in anymore!');
-        }
-        navigation.dispatch(StackActions.popToTop());
-        return true;
-      })
-      .catch((error) => {
-        Alert.alert('Error!', error.message);
-        return false;
-      });
-    }; */}
 
     const { signOut } = React.useContext(AuthContext);
 
@@ -53,9 +35,9 @@ import { AuthContext } from '../Components/context';
               </Text>
     
            
-              {/*<Text style= {stylesheet.General}>
+              <Text style= {stylesheet.General}>
                 General
-    </Text>*/}
+              </Text>
               
           
               <Text style= {stylesheet.Logout}
@@ -128,7 +110,7 @@ import { AuthContext } from '../Components/context';
         height: 50,
         left: 25,
         right: "auto",
-        top: 241,
+        top: 316,
         bottom: "auto",
         transform: [{translateX:0}, {translateY:0}, {rotate: "0deg"},],
         //fontFamily: "Inter",

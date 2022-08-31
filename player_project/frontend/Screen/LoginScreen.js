@@ -24,51 +24,6 @@ const LoginScreen = ({navigation}) => {
 
     const { signIn } = React.useContext(AuthContext);
 
-    const handleSubmitPress = () => {
-        setErrortext('');
-        if (!userName) {
-            alert('Please fill Username');
-            return;
-        }
-        if (!userPassword) {
-            alert('Please fill Password');
-            return;
-        }
-        setLoading(true);
-        let dataToSend = {email: userName, password: userPassword};
-        let formBody = [];
-        for (let key in dataToSend) {
-            let encodedKey = encodeURIComponent(key);
-            let encodedValue = encodeURIComponent(dataToSend[key]);
-            formBody.push(encodedKey + '=' + encodedValue);
-        }
-        formBody = formBody.join('&');
-
-        fetch('http://localhost:4040/api/user/login', {
-            method: 'POST',
-            body: formBody,
-            headers: {
-                'Content-Type':
-                'application/x-www-form-urlencoded;charset=UTF-8',
-            },
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            setLoading(false);
-            if (responseJson.status === 'success') {
-                AsyncStorage.setItem('userId', responseJson.data.email);
-                console.log(responseJson.data.email);
-                //navigation.replace('DrawerNavigationRoutes');
-            } else{
-                setErrortext(responseJson.msg);
-                console.log('Please check your username or password');
-            }
-        })
-        .catch((error) => {
-            setLoading(false);
-            console.error(error);
-        });
-    };
 
     const loginHandle = (userName, password) => {
       signIn(userName, password);

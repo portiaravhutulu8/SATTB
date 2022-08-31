@@ -139,17 +139,12 @@ const App = () => {
     :
       <RootStackScreen/>
     }
-     
-      {/*<Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
-        <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
-  </Drawer.Navigator>*/}
   
     </NavigationContainer>
     </AuthContext.Provider>
   );
 }
 
-Logs.disableExpoCliLogging();
+//Logs.disableExpoCliLogging();
 
 export default App;
