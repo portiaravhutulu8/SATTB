@@ -1,0 +1,52 @@
+import React from "react";
+import { useState } from "react";
+import MaleRankings from "../Data/MaleRankings.json";
+
+
+const Rankings = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    return (
+        <div className="container">
+            <h2>Male Rankings</h2>
+            <input 
+                type="text" 
+                placeholder='Find Players...' 
+                className="form-control" 
+                style={{ 
+                    marginTop: 50, 
+                    marginBottom: 20, 
+                    width: "40%" }}
+                onChange = {(ev) => {
+                    setSearchTerm(ev.target.value);
+                }}
+                />
+            <table className="table table-bordered">
+                <thead className= "thead-dark.th">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player Name </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {MaleRankings.filter((value)=>{
+                        if (searchTerm === "") { 
+                            return value;
+                        } else if (
+                            value.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            value.LastName.toLowerCase().includes(searchTerm.toLowerCase())                            
+                        ) {
+                            return value;
+                        }
+                    }).map((map) => (
+                        <tr key = {map.id}> 
+                            <td>{map.rank}</td>
+                            <td>{map.firstName} {map.LastName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>    
+  );
+};
+
+export default Rankings;
