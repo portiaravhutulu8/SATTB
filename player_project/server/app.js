@@ -11,7 +11,7 @@ const playerRouter = require("./routes/player.js")
 
 
 app.use(express.json());
-app.use('/api/user', playerRouter);
+app.use('/api/user', playerRouter); 
 /*app.use((req, res, next) => {
     req.on('data', (chunk) => {
         console.log(JSON.parse(chunk));//will produce teh results on the terminal

@@ -27,19 +27,24 @@ const playerSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        dateOfBirth:
+        age:
         {
             type: String,
             required: true
         },
-        /*gender:
+        gender:
         {
             type: String,
             required: true
-        }*/
+        },
+        province:
+        {
+            type: String,
+            required: true
+        }
     });
 //function (next)
-playerSchema.pre('save', async function (next) {
+playerSchema.pre('save', async function (next) {//encrypting the user password using Bcrypt method.
 
     if (this.isModified('password')) {
         const hash = await bcrypt.hash(this.password, 8)
@@ -50,9 +55,8 @@ playerSchema.pre('save', async function (next) {
 
 });
 
-playerSchema.methods.comparePassword=async function(password)
-{
-    const result=await bcrypt.compareSync(password,this.password);
+playerSchema.methods.comparePassword = async function (password) { //comparing user passwords when signing in
+    const result = await bcrypt.compareSync(password, this.password);
     return result;
 };
 
