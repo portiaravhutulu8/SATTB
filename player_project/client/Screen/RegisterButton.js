@@ -16,7 +16,7 @@ const RegisterButton = () => {
           
           <Image 
           
-          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/frontend/Image/TournamentHeader.png')}
+          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/client/Image/TournamentHeader.png')}
           style= {stylesheet.styleTournamentHeader}>
             
         </Image>

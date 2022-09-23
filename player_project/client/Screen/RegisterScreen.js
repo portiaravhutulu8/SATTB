@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-
+//import { firebase } from '@react-native-firebase/installations';
 import Loader from './Components/Loader';
 
 const RegisterScreen = (props) => {
@@ -69,6 +69,27 @@ const RegisterScreen = (props) => {
       address: userAddress,
       password: userPassword,
     };
+    {/*firebase.auth()
+
+    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then((res) => {
+      res.user.updateProfile({
+        displayName: this.state.displayName
+      })
+      console.log('User registered successfully!')
+      this.setState({
+        isLoading: false,
+        displayName: '',
+        email: '',
+        password: '',
+      })
+      this.props.navigation.navigate('LoginScreen')
+    })
+    .catch(error => this.setState({
+      errorMessage: error.message
+    }))
+  */}
+
     var formBody = [];
     for (var key in dataToSend) {
       var encodedKey = encodeURIComponent(key);
@@ -126,7 +147,7 @@ const RegisterScreen = (props) => {
           <Text style={styles.buttonTextStyle}>Login Now</Text>
         </TouchableOpacity>
       </View>
-    );
+      );
   }
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(255,255,255,1)'}}>

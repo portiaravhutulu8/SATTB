@@ -16,7 +16,7 @@ const RankingsScreen = () => {
           
           <Image 
           
-          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/frontend/Image/Rankings.png')}
+          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/client/Image/Rankings.png')}
           style= {stylesheet.styleTournamentHeader}>
             
         </Image>

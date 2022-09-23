@@ -13,9 +13,10 @@ import RootStackScreen from './Screen/RootStackScreen';
 import { ActivityIndicator } from 'react-native-paper';
 import { Switch } from 'react-native-gesture-handler';
 import RankingsScreen from './Screen/RankingsScreen';
-//import RegisterScreen from './Screen/RegisterScreen';
-import { Logs } from 'expo';
+import 'expo-dev-menu';
+import ViewTournaments from './Screen/ViewTournaments';
 import HomeScreen from './Screen/DrawerScreens/HomeScreen';
+import Firebase, {FirebaseProvider} from './config/Firebase';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -99,7 +100,7 @@ const App = () => {
     setTimeout(() => {
       //setIsLoading(false);
       let userToken;
-      userToken = 'abc';
+      userToken = 'Logged In';
       console.log('user token: ', userToken);
 
       dispatch({ type: 'RETRIEVE_TOKEN',  token: userToken });
@@ -112,13 +113,15 @@ const App = () => {
 
   if( loginState.isLoading ) {
     return(
-      <View style = {{flex:1, justifyContent: 'center', alignItems: 'center', top: 350}}>
+      <View style = {{flex:1, justifyContent: 'center', alignItems: 'center', top: 60}}>
         <ActivityIndicator size="large" />
       </View>
     )
   }
   
   return (
+    <FirebaseProvider value={Firebase}>
+
     <AuthContext.Provider value={authContext}>
     <NavigationContainer>
       { loginState.userToken !== null? (
@@ -128,8 +131,8 @@ const App = () => {
         <Drawer.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
         <Drawer.Screen name="RankingsScreen" component={RankingsScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Home" component={HomeScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="ProfileScreen" component={ProfileScreen} 
-  options= {{headerShown: false}}/>
+        <Drawer.Screen name="View" component={ViewTournaments} options= {{headerShown: false}} />
+        <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options= {{headerShown: false}}/>
         </Drawer.Navigator>
       )
     :
@@ -138,6 +141,7 @@ const App = () => {
   
     </NavigationContainer>
     </AuthContext.Provider>
+    </FirebaseProvider>
   );
 }
 

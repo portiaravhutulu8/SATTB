@@ -93,6 +93,12 @@ const LoginScreen = ({navigation}) => {
                   onPress={ () => navigation.navigate('Register')}>
                   Don't have an account ? Register
                 </Text>
+                <Text
+                style={styles.forgotPassTextStyle}
+                onPress={ () => navigation.navigate('Forgot Password?')}>
+                Forgot Password?
+                </Text>
+               
               </KeyboardAvoidingView>
             </View>
           </ScrollView>
@@ -145,6 +151,14 @@ const LoginScreen = ({navigation}) => {
       },
       registerTextStyle: {
         color: 'rgba(0,0,0,1)',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 14,
+        alignSelf: 'center',
+        padding: 10,
+      },
+      forgotPassTextStyle: {
+        color: '#039BE5',
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 14,

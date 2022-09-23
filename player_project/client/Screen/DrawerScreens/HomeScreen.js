@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-
+import { A } from '@expo/html-elements';
 import { useFonts } from '@expo-google-fonts/inter';
-import { Dimensions, Image, ScrollView, SafeAreaView, Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'; 
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'; 
 
 
 const HomeScreen = ({navigation}) => {
   return (
       <View style={stylesheet.styleHomePage}>
       <View style={stylesheet.styleGrayHeader}>
-        </View>
-        <TouchableOpacity onPress={ () => navigation.navigate('ProfileScreen')}>
+      <TouchableOpacity onPress={ () => navigation.navigate('ProfileScreen')}>
             <Image style={stylesheet.styleUserImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/fMOJEF7qf7mmHIFFVZlpQLoz.png" }}/>
         </TouchableOpacity>
+        </View>
+        
         <Image style={stylesheet.styleMainPageHeaderImage} source={{ uri: "https://nyc3.digitaloceanspaces.com/sizze-storage/media/images/YcKxdBFJPrfjR63lzPnTWAiS.png" }}>
         </Image>
         
@@ -47,7 +48,9 @@ const HomeScreen = ({navigation}) => {
             Personlise app functionality
           </Text>
           <Text style={stylesheet.styleCaption1}>
+          <A href="https://www.tabletennis.co.za">
             SATTB News & Updates
+            </A>
           </Text>
         </View>
 
@@ -202,8 +205,9 @@ const HomeScreen = ({navigation}) => {
     },
     styleUserImage: {
       position: "absolute",
-      left: 310,
-      top: 45,
+      alignSelf: 'flex-end',
+      right: 20,
+      top: 15,
       borderRadius: null,
       width: 41,
       height: 41,

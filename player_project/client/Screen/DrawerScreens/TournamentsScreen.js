@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'; 
-import {Svg, Path } from 'react-native-svg';
 
 
 const TournamentsScreen = ({navigation}) => {
@@ -9,7 +8,7 @@ const TournamentsScreen = ({navigation}) => {
           <View style = {stylesheet.TournamentsCont}>
           </View>
           <Image 
-          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/frontend/Image/TournamentHeader.png')}
+          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/client/Image/TournamentHeader.png')}
           style= {stylesheet.styleTournamentHeader}>
         </Image>
           <View style = {stylesheet.Group1}>
@@ -39,7 +38,7 @@ const TournamentsScreen = ({navigation}) => {
               <Text 
               style = {stylesheet.Registered}
               onPress={ () => navigation.navigate('RegisteredTournaments')}>
-                Registered
+                View Registered
               </Text>
             
           </View>
@@ -52,29 +51,18 @@ const TournamentsScreen = ({navigation}) => {
               </Text>
             
             
-              <Text style = {stylesheet.ViewAll}>
+              <Text style={stylesheet.ViewAll}
+              onPress={() => navigation.navigate('View')}>
                 View All
-              </Text>
+               </Text>
             
           </View>
-          <View style = {stylesheet.Group4}>
-            <View style = {stylesheet.Button4}>
-            </View>
-            
-              <Text style = {stylesheet.Attend}>
-                Attend available tournaments
-              </Text>
-            
-           
-              <Text style = {stylesheet.Watch}>
-                Watch
-              </Text>
-           
-          </View>
+          
         </View>
       );
     };
 
+  
     export default TournamentsScreen;
 
     const stylesheet = StyleSheet.create({
@@ -119,7 +107,7 @@ const TournamentsScreen = ({navigation}) => {
         width: 292,
         height: 84,
         overflow: "hidden",
-        //left: 10,
+        left: 10,
         //alignSelf: "center",
         borderRadius: 14,
         transform: [{translateX: 34}, {translateY:194}, {rotate: "0deg"},],
@@ -225,62 +213,7 @@ const TournamentsScreen = ({navigation}) => {
         textAlignVertical: "top",
         letterSpacing: 0.1,
       },
-      Group4: {
-        position: "absolute",
-        width: 292,
-        height: 84,
-        borderRadius: 14,
-        left: 10,
-        overflow: "hidden",
-        transform: [{translateX: 34}, {translateY:548}, {rotate: "0deg"},],
-        backgroundColor: "rgba(0,0,0,1)",
-      },
-      Button4: {
-        position: "absolute",
-        width: 292,
-        height: 84,
-        borderRadius: 14,
-        alignSelf: "center",
-        opacity: 1,
-        transform: [{translateX: 0}, {translateY:0}, {rotate: "0deg"},],
-        backgroundColor: "rgba(179,179,179,1)",
-        left: 0,
-        right: "auto",
-      },
-      Attend: {
-        position: "absolute",
-        width: 195,
-        height: 18,
-        transform: [{translateX: 0}, {translateY:45}, {rotate: "0deg"},],
-        left: 70,
-        right: "auto",
-        //alignSelf: "center",
-        //fontFamily: "Inter",
-        fontWeight: "400",
-        textDecorationLine: "none",
-        fontSize: 14,
-        color: "rgba(255,255,255,1)",
-        textAlign: "left",
-        textAlignVertical: "top",
-        letterSpacing: 0.1,
-      },
-      Watch: {
-        position: "absolute",
-        width: "auto",
-        height: "auto",
-        transform: [{translateX: 0}, {translateY:16}, {rotate: "0deg"},],
-        left: 70,
-        right: "auto",
-        //fontFamily: "Inter",
-        fontWeight: "700",
-        textDecorationLine: "none",
-        //alignSelf: "center",
-        fontSize: 24,
-        color: "rgba(255,255,255,1)",
-        textAlign: "left",
-        textAlignVertical: "top",
-        letterSpacing: 0.1,
-      },
+      
       Group3: {
         position: "absolute",
         width: 292,

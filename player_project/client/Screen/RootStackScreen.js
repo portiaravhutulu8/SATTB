@@ -7,6 +7,7 @@ import TournamentsScreen from './DrawerScreens/TournamentsScreen';
 import HomeScreen from './DrawerScreens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import SettingsScreen from './DrawerScreens/SettingsScreen';
+import ForgotPassword from './ForgotPassword';
 
 const RootStack  = createStackNavigator();
 
@@ -17,6 +18,8 @@ const RootStackScreen = ({navigation}) => (
         <RootStack.Screen name="Register" component={RegisterScreen}  />
         <RootStack.Screen name="Tournaments" component={TournamentsScreen}  />
         <RootStack.Screen name="Settings" component={SettingsScreen}  />
+        <RootStack.Screen name="Forgot Password?" component={ForgotPassword} />
+
         
 
 
