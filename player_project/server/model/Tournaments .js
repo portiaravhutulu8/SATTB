@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const TournamentsSchema = mongoose.Schema({
+const TournamentsSchema = new mongoose.Schema({
     tournamentName: {
         type: String,
 
