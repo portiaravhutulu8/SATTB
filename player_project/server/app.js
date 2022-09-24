@@ -7,7 +7,7 @@ require("./Database/db")
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8000;
-const playerRouter = require("./routes/player.js")
+const playerRouter = require("./routes/player.js");
 
 
 app.use(express.json());

@@ -13,10 +13,10 @@ import RootStackScreen from './Screen/RootStackScreen';
 import { ActivityIndicator } from 'react-native-paper';
 import { Switch } from 'react-native-gesture-handler';
 import RankingsScreen from './Screen/RankingsScreen';
-import 'expo-dev-menu';
-import ViewTournaments from './Screen/ViewTournaments';
+//import RegisterScreen from './Screen/RegisterScreen';
+import { Logs } from 'expo';
 import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-import Firebase, {FirebaseProvider} from './config/Firebase';
+import TournamentInfo from './Screen/DrawerScreens/TournamentInfo';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -27,7 +27,7 @@ const App = () => {
 
   const initialLoginState ={
     isLoading: true,
-    userName: null,
+    //userName: null,
     userToken: null,
     isSignout: true,
 
@@ -45,14 +45,14 @@ const App = () => {
         return{
           ...prevState,
           userToken: action.token,
-          userName: action.id,
+          //userName: action.id,
           isLoading: false,
           isSignout: false,
         };
       case 'LOGOUT':
           return{
       
-            userName: null,
+            //userName: null,
             userToken: null,
             isLoading: false,
             isSignout: true,
@@ -61,7 +61,7 @@ const App = () => {
             return{
               ...prevState,
               userToken: action.token,
-              userName: action.id,
+              //userName: action.id,
               isLoading: false,
             };
     }
@@ -75,12 +75,12 @@ const App = () => {
       //setUserToken('abcd');
       //setIsLoading(false);
       let userToken;
-      userName= null;
+      //userName= null;
      {/* if(userName == 'user' && password == 'password') {
         userToken = 'abcd';
       }*/}
       console.log('user token: ', userToken);
-      dispatch({ type: 'LOGIN', id: userName, token: userToken });
+      dispatch({ type: 'LOGIN', token: userToken });
     },
     signOut: () => {
       //let userToken;
@@ -100,7 +100,7 @@ const App = () => {
     setTimeout(() => {
       //setIsLoading(false);
       let userToken;
-      userToken = 'Logged In';
+      userToken = 'abc';
       console.log('user token: ', userToken);
 
       dispatch({ type: 'RETRIEVE_TOKEN',  token: userToken });
@@ -113,15 +113,13 @@ const App = () => {
 
   if( loginState.isLoading ) {
     return(
-      <View style = {{flex:1, justifyContent: 'center', alignItems: 'center', top: 60}}>
+      <View style = {{flex:1, justifyContent: 'center', alignItems: 'center', top: 350}}>
         <ActivityIndicator size="large" />
       </View>
     )
   }
   
   return (
-    <FirebaseProvider value={Firebase}>
-
     <AuthContext.Provider value={authContext}>
     <NavigationContainer>
       { loginState.userToken !== null? (
@@ -131,8 +129,10 @@ const App = () => {
         <Drawer.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
         <Drawer.Screen name="RankingsScreen" component={RankingsScreen} options= {{headerShown: false}} />
         <Drawer.Screen name="Home" component={HomeScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="View" component={ViewTournaments} options= {{headerShown: false}} />
-        <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options= {{headerShown: false}}/>
+        <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options= {{headerShown: false}} />
+        <Drawer.Screen name="TournamentInfo" component={TournamentInfo} 
+
+  options= {{headerShown: false}}/>
         </Drawer.Navigator>
       )
     :
@@ -141,7 +141,6 @@ const App = () => {
   
     </NavigationContainer>
     </AuthContext.Provider>
-    </FirebaseProvider>
   );
 }
 
