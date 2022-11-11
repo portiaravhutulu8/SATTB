@@ -124,7 +124,7 @@ const RegisterButton = () => {
 
 
 
-          <Image source={require('/Users/zaid/Desktop/MSA studies/2022/Second Semester/IE/client/Image/TournamentHeader.png')}
+          <Image source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/client/Image/TournamentHeader.png')}
             style={stylesheet.styleTournamentHeader}>
 
           </Image>

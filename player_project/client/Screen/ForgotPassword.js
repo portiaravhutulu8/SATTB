@@ -1,65 +1,78 @@
-import React, {Component, Fragment} from 'react';
+import React, { Fragment, useState} from 'react';
 import {Text, StyleSheet, SafeAreaView, View, Button} from 'react-native';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
 import { TextInput } from 'react-native-gesture-handler';
-import { withFirebaseHOC } from '../config/Firebase';
+import axios from 'axios';
 
-const validationSchema = Yup.object().shape({
-    email: Yup.string()
-    .label('Email')
-    .email('Enter a valid email')
-    .required('Please enter a registered email')
-})
+const ForgotPassword =() => {
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
 
-class ForgotPassword extends Component {
-    handlePasswordReset =async (values, actions) => {
-        const {email} =values;
-
-        try{
-            await this.props.firebase.passwordReset(email);
-            console.log('Password reset email sent successfully');
-            this.props.navigation.navigate('LoginScreen');
-        } catch (error) {
-            actions.setFieldError('general', error.message);
-        }
-    };
-
-    render() {
+    const handleSubmit =(email, setSubmitting) => {
+        handleMessage(null);
+        const url = 'http://192.168.8.168:3000/user/forgot-password';
+    
+        axios
+         .post(url, email)
+         .then((response) => {
+          const result = response.data;
+          const {message, success, data} = result;
+    
+          if (success !== 'true')  {
+            handleMessage(message, success);
+          } else {
+            navigation.navigate('Dashboard', { ...data[0] });
+          }
+          setSubmitting(false);
+         })
+         .catch((error) => {
+          //console.log(error.JSON());
+          setSubmitting(false);
+          handleMessage("An  error occured. Check your network and try again");
+         });
+      };
+      const handleMessage =  (message, type = 'FAILED') => {
+        setMessage(message);
+        setMessageType(type);
+      };
+   
         return (
             <SafeAreaView style={stylesheet.container}>
                 
                 <Formik 
-                initialValues={{email: ''}}
-                onSubmit={(values,actions) => {
-                    this.handlePasswordReset(values, actions)
-                }}
-                validationSchema={validationSchema}>
+                 initialValues={{email: ''}}
+                 onSubmit={(values, {setSubmitting}) => {
+                   if (values.email == ''){
+                     handleMessage('Please fill in email');
+                     setSubmitting(false);
+                   } else {
+                     handleSubmit(values, setSubmitting);
+                   }
+                 }}
+                >
                  {({
-                    handleChange,
-                    values,
-                    handleSubmit,
-                    errors,
                     isValid,
-                    touched,
                     handleBlur,
-                    isSubmitting
+                    handleChange, handleSubmit, values, isSubmitting
                  }) => (
                     <Fragment>
                      <View style={stylesheet.SectionStyle}>
                         <TextInput
                         style={stylesheet.inputStyle}
                         name='email'
-                        value={values.email}
                         onChangeText={handleChange('email')}
+                        value={values.email}
                         placeholder= 'Enter email'
                         autoCapitalize='none'
                         onBlur={handleBlur('email')}
                         />
                         </View>
+                        <Text style={stylesheet.MsgBox} type={messageType}>{message}</Text>
+
                         <View style={stylesheet.buttonContainer}>
+
                             <Button
-                            
                             title='Send Email'
                             buttonType='outline'
                             onPress={handleSubmit}
@@ -73,17 +86,15 @@ class ForgotPassword extends Component {
             </SafeAreaView>
         )
         
-    }
 };
 
-export default withFirebaseHOC(ForgotPassword);
+export default ForgotPassword;
 
 const stylesheet = StyleSheet.create({
 
    container:{
     flex: 1,
     backgroundColor: '#fff',
-   
    },
    buttonContainer: {
     margin: 25,
@@ -105,4 +116,27 @@ const stylesheet = StyleSheet.create({
     borderRadius: 30,
     borderColor: '#dadae8',
   },
+  error_msg: {
+    textAlign: 'center',
+    borderRadius: 15,
+    color: 'white',
+    backgroundColor: '#f34646',
+    fontSize: 14,
+    margin: 5,
+    padding: 15,
+
+  },
+  success_msg: {
+    textAlign: 'center',
+    borderRadius: 15,
+    color: 'white',
+    backgroundColor: '#5cdd5c',
+    fontSize: 14,
+    margin: 5,
+    padding: 15,
+  },
+  MsgBox: {
+    alignSelf: 'center',
+    color: 'red',
+  }
 });

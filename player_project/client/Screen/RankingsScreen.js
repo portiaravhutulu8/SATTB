@@ -7,9 +7,6 @@ import { Dimensions, Image, ScrollView, Button, StyleSheet, Text, View, TextInpu
 const RankingsScreen = () => {
   const navigation = useNavigation();
 
-
-  
-  
     return (
         <View style = {stylesheet.Tournaments}>
             
@@ -19,7 +16,7 @@ const RankingsScreen = () => {
           
           <Image 
           
-          source={require('/Users/zaid/Desktop/MSA studies/2022/Second Semester/IE/client/Image/Rankings.png')}
+          source={require('/Users/thilivhaliportiaravhutulu/SATTB/player_project/SATableTennisApp/player_project/client/Image/Rankings.png')}
           style= {stylesheet.styleTournamentHeader}>
             
         </Image>

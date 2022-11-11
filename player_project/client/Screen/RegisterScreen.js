@@ -4,28 +4,20 @@ import {
   TextInput,
   View,
   Text,
-  Image,
+  SafeAreaView,
   KeyboardAvoidingView,
   Keyboard,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator
 } from 'react-native';
-//import { firebase } from '@react-native-firebase/installations';
-import Loader from './Components/Loader';
+import { Formik } from 'formik';
+import axios from 'axios';
 
-const RegisterScreen = (props) => {
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userAge, setUserAge] = useState('');
-  const [userGender, setUserGender] = useState('');
-  const [userAddress, setUserAddress] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
-  const [
-    isRegistraionSuccess,
-    setIsRegistraionSuccess
-  ] = useState(false);
+const RegisterScreen = ({navigation}) => {
+  
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
 
   const emailInputRef = createRef();
   const ageInputRef = createRef();
@@ -33,125 +25,38 @@ const RegisterScreen = (props) => {
   const addressInputRef = createRef();
   const passwordInputRef = createRef();
 
-  const handleSubmitButton = () => {
-    setErrortext('');
-    if (!userName) {
-      alert('Please fill Name');
-      return;
-    }
-    if (!userEmail) {
-      alert('Please fill Email');
-      return;
-    }
-    if (!userAge) {
-      alert('Please fill Age');
-      return;
-    }
-    if (!userGender) {
-      alert('Please fill Gender');
-      return;
-    }
-    if (!userAddress) {
-      alert('Please fill Address');
-      return;
-    }
-    if (!userPassword) {
-      alert('Please fill Password');
-      return;
-    }
-    //Show Loader
-    setLoading(true);
-    var dataToSend = {
-      name: userName,
-      email: userEmail,
-      age: userAge,
-      gender: userGender,
-      address: userAddress,
-      password: userPassword,
-    };
-    {/*firebase.auth()
+//form handling
+  const handleSignup =(credentials, setSubmitting) => {
+    handleMessage(null);
+    const url = 'http://192.168.8.168:3000/user/signup';
 
-    .createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then((res) => {
-      res.user.updateProfile({
-        displayName: this.state.displayName
-      })
-      console.log('User registered successfully!')
-      this.setState({
-        isLoading: false,
-        displayName: '',
-        email: '',
-        password: '',
-      })
-      this.props.navigation.navigate('LoginScreen')
-    })
-    .catch(error => this.setState({
-      errorMessage: error.message
-    }))
-  */}
+    axios
+     .post(url, credentials)
+     .then((response) => {
+      const result = response.data;
+      const {message, status, data} = result;
 
-    var formBody = [];
-    for (var key in dataToSend) {
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
-
-    fetch('http://localhost:4040/api/user/register', {
-      method: 'POST',
-      body: formBody,
-      headers: {
-        //Header Defination
-        'Content-Type':
-        'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        //Hide Loader
-        setLoading(false);
-        console.log(responseJson);
-        // If server response message same as Data Matched
-        if (responseJson.status === 'success') {
-          setIsRegistraionSuccess(true);
-          console.log(
-            'Registration Successful. Please Login to proceed'
-          );
-        } else {
-          setErrortext(responseJson.msg);
-        }
-      })
-      .catch((error) => {
-        //Hide Loader
-        setLoading(false);
-        console.error(error);
-      });
+      if (status !== 'SUCCESS')  {
+        handleMessage(message, status);
+      } else {
+        navigation.navigate('Dashboard', { ...data[0] });
+      }
+      setSubmitting(false);
+     })
+     .catch((error) => {
+      console.log(error.JSON());
+      setSubmitting(false);
+      handleMessage("An  error occured. Check your network and try again");
+     });
   };
-  if (isRegistraionSuccess) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#307ecc',
-          justifyContent: 'center',
-        }}>
-        
-        <Text style={styles.successTextStyle}>
-          Registration Successful
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          activeOpacity={0.5}
-          onPress={() => props.navigation.navigate('LoginScreen')}>
-          <Text style={styles.buttonTextStyle}>Login Now</Text>
-        </TouchableOpacity>
-      </View>
-      );
-  }
+
+  const handleMessage =  (message, type = 'FAILED') => {
+    setMessage(message);
+    setMessageType(type);
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(255,255,255,1)'}}>
-      <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -162,10 +67,27 @@ const RegisterScreen = (props) => {
          
         </View>
         <KeyboardAvoidingView enabled>
+        <Formik
+            initialValues={{name: '', email: '', password: '', confirmPassword: '', age: '', gender: '', address: ''}}
+            onSubmit={(values, {setSubmitting}) => {
+              if (values.name == '' || values.email == '' || values.password == '' || values.confirmPassword == '' || values.age == '' || values.gender == '' || values.address == ''){
+                handleMessage('Please fill in all the fields');
+                setSubmitting(false);
+              } else if(values.password !== values.confirmPassword) {
+                handleMessage('Passwords do not match!');
+                setSubmitting(false);
+              } else {
+                handleSignup(values, setSubmitting);
+              }
+            }} 
+             >
+              {({ handleChange, handleSubmit, values, isSubmitting}) => (
+                <SafeAreaView>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserName) => setUserName(UserName)}
+              onChangeText={handleChange('name')}
+              value={values.name}
               underlineColorAndroid="#f000"
               placeholder="Enter Name"
               placeholderTextColor="#8b9cb5"
@@ -180,7 +102,8 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+              onChangeText={handleChange('email')}
+              value={values.email}
               underlineColorAndroid="#f000"
               placeholder="Enter Email"
               placeholderTextColor="#8b9cb5"
@@ -197,11 +120,28 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserPassword) =>
-                setUserPassword(UserPassword)
-              }
+              onChangeText={handleChange('password')}
+              value={values.password}
               underlineColorAndroid="#f000"
               placeholder="Enter Password"
+              placeholderTextColor="#8b9cb5"
+              ref={passwordInputRef}
+              returnKeyType="next"
+              secureTextEntry={true}
+              onSubmitEditing={() =>
+                passwordInputRef.current &&
+                passwordInputRef.current.focus()
+              }
+              blurOnSubmit={false}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={handleChange('confirmPassword')}
+              value={values.confirmPassword}
+              underlineColorAndroid="#f000"
+              placeholder="Confirm Password"
               placeholderTextColor="#8b9cb5"
               ref={passwordInputRef}
               returnKeyType="next"
@@ -216,7 +156,8 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserAge) => setUserAge(UserAge)}
+              onChangeText={handleChange('age')}
+              value={values.age}
               underlineColorAndroid="#f000"
               placeholder="Enter Age"
               placeholderTextColor="#8b9cb5"
@@ -233,7 +174,8 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserGender) => setUserGender(UserGender) }
+              onChangeText={handleChange('gender')}
+              value={values.gender}
               underlineColorAndroid="#f000"
               placeholder="Enter Gender"
               placeholderTextColor="#8b9cb5"
@@ -250,11 +192,10 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserAddress) =>
-                setUserAddress(UserAddress)
-              }
+              onChangeText={handleChange('address')}
+              value={values.address}
               underlineColorAndroid="#f000"
-              placeholder="Enter Address"
+              placeholder="Enter Home Province"
               placeholderTextColor="#8b9cb5"
               autoCapitalize="sentences"
               ref={addressInputRef}
@@ -263,17 +204,23 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          {errortext != '' ? (
-            <Text style={styles.errorTextStyle}>
-              {errortext}
-            </Text>
-          ) : null}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            activeOpacity={0.5}
-            onPress={handleSubmitButton}>
-            <Text style={styles.buttonTextStyle}>REGISTER</Text>
-          </TouchableOpacity>
+          <Text style={styles.MsgBox} type={messageType}>{message}</Text>
+          {!isSubmitting && <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress= {handleSubmit}>
+                  <Text style={styles.buttonTextStyle}>REGISTER</Text>
+                </TouchableOpacity>}
+
+                {isSubmitting && <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  disabled={true}>
+                  <ActivityIndicator size="large" color='#FFFFFF' />
+                </TouchableOpacity>}
+      </SafeAreaView>
+            )}
+            </Formik>
         </KeyboardAvoidingView>
       </ScrollView>
     </View>
@@ -328,4 +275,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 30,
   },
+  MsgBox:{
+    textAlign: 'center',
+    fontSize: 13,
+    color: 'red',
+  }
 });

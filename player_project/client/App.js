@@ -1,149 +1,43 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContent } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
-import MainTabScreen from './MainTabScreen';
-import TournamentsScreen from './Screen/DrawerScreens/TournamentsScreen';
-import ProfileScreen from './Screen/ProfileScreen';
-import { AuthContext } from './Screen/Components/context';
-import RegisterButton from './Screen/RegisterButton';
+import React from 'react';
 import RootStackScreen from './Screen/RootStackScreen';
-import { ActivityIndicator } from 'react-native-paper';
-import { Switch } from 'react-native-gesture-handler';
-import RankingsScreen from './Screen/RankingsScreen';
-//import RegisterScreen from './Screen/RegisterScreen';
-import { Logs } from 'expo';
-import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-import TournamentInfo from './Screen/DrawerScreens/TournamentInfo';
 
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+//const Drawer = createDrawerNavigator();
+//const Stack = createStackNavigator();
 
-const App = () => {
-  const [isLoading, setIsLoading] =React.useState(true);
-  const [userToken, setUserToken] =React.useState(null);
-
-  const initialLoginState ={
-    isLoading: true,
-    //userName: null,
-    userToken: null,
-    isSignout: true,
-
-  };
-
-  const loginReducer =(prevState, action) => {
-    switch( action.type ) {
-      case 'RETRIEVE_TOKEN':
-        return{
-          ...prevState,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case 'LOGIN':
-        return{
-          ...prevState,
-          userToken: action.token,
-          //userName: action.id,
-          isLoading: false,
-          isSignout: false,
-        };
-      case 'LOGOUT':
-          return{
-      
-            //userName: null,
-            userToken: null,
-            isLoading: false,
-            isSignout: true,
-          };
-      case 'REGISTER':
-            return{
-              ...prevState,
-              userToken: action.token,
-              //userName: action.id,
-              isLoading: false,
-            };
-    }
-
-  };
-
-
-  const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
-  const authContext = React.useMemo(() => ({
-    signIn: () => {
-      //setUserToken('abcd');
-      //setIsLoading(false);
-      let userToken;
-      //userName= null;
-     {/* if(userName == 'user' && password == 'password') {
-        userToken = 'abcd';
-      }*/}
-      console.log('user token: ', userToken);
-      dispatch({ type: 'LOGIN', token: userToken });
-    },
-    signOut: () => {
-      //let userToken;
-      //userToken== null;
-      setUserToken(null);
-      setIsLoading(false);
-      dispatch({ type: 'LOGOUT', token: userToken });
-    },
-    signUp: () => {
-      setUserToken('abcd');
-      setIsLoading(false);
-    },
-
-  }), []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      //setIsLoading(false);
-      let userToken;
-      userToken = 'abc';
-      console.log('user token: ', userToken);
-
-      dispatch({ type: 'RETRIEVE_TOKEN',  token: userToken });
-    },
-    1000);
-
-  },
-  []);
-
-
-  if( loginState.isLoading ) {
-    return(
-      <View style = {{flex:1, justifyContent: 'center', alignItems: 'center', top: 350}}>
-        <ActivityIndicator size="large" />
-      </View>
-    )
-  }
+export default function App() {
   
-  return (
-    <AuthContext.Provider value={authContext}>
-    <NavigationContainer>
-      { loginState.userToken !== null? (
-        <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
-        <Drawer.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="Tournaments" component={TournamentsScreen} />
-        <Drawer.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
-        <Drawer.Screen name="RankingsScreen" component={RankingsScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="Home" component={HomeScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options= {{headerShown: false}} />
-        <Drawer.Screen name="TournamentInfo" component={TournamentInfo} 
-
-  options= {{headerShown: false}}/>
-        </Drawer.Navigator>
-      )
-    :
-      <RootStackScreen/>
-    }
-  
-    </NavigationContainer>
-    </AuthContext.Provider>
-  );
+  return  <RootStackScreen />;
+        {/*
+        <Stack.Navigator>
+        <Stack.Screen name="Dashboard" component={MainTabScreen} options= {{headerShown: false}} />
+        <Stack.Screen name="Tournaments" component={TournamentsScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen}  />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options= {{headerShown: false}}/>
+        <Stack.Screen name="RegisterButton" component={RegisterButton} options= {{headerShown: false}} />
+        <Stack.Screen name="RankingsScreen" component={RankingsScreen} options= {{headerShown: false}} />
+        <Stack.Screen name="Home" component={HomeScreen} options= {{headerShown: false}} />
+        <Stack.Screen name="Edit Profile" component={ProfileScreen}  />
+        <Stack.Screen 
+        name="Profile" 
+        component={ViewProfile}
+        options={{
+          headerRight: () => (
+            <Icon.Button
+            name="account-edit"
+            size={25}
+            backgroundColor="#fff"
+            color="#000"
+            onPress={() => navigation.navigate('Edit Profile')}
+            />
+          ),
+        }}
+        />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options= {{headerShown: false}} />
+        <Stack.Screen name="TournamentInfo" component={TournamentInfo} options= {{headerShown: false}}/>
+        </Stack.Navigator>
+      */}
+       
 }
 
-//Logs.disableExpoCliLogging();
-
-export default App;
+//export default App;

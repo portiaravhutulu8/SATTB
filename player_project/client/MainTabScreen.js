@@ -1,10 +1,9 @@
 import React from 'react';
 import icon from 'react-native-vector-icons/Ionicons';
-import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-import TournamentsScreen from './Screen/DrawerScreens/TournamentsScreen';
-import RegisteredTournamentsScreen from './Screen/DrawerScreens/RegisteredTournamentsScreen';
-import SettingsScreen from './Screen/DrawerScreens/SettingsScreen';
-import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './Screen/TabScreens/HomeScreen';
+import TournamentsScreen from './Screen/TabScreens/TournamentsScreen';
+import RegisteredTournamentsScreen from './Screen/TabScreens/RegisteredTournamentsScreen';
+import SettingsScreen from './Screen/TabScreens/SettingsScreen';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
